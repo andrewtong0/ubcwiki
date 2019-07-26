@@ -1,26 +1,57 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Courses from './Components/Courses/Courses';
+import { Dropdown, DropdownButton, Navbar } from 'react-bootstrap';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          React static site
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      curSubject: '',
+      selected: false
+    }
+  }
+
+  changeCurSubject1 = (event) => {
+    this.setState({ curSubject: event.target.value });
+  }
+
+  changeCurSubject2 = (course) => {
+    this.setState({ curSubject: course, selected: true });
+  }
+
+
+
+
+  render() {
+    return (
+      <div className="tc">
+        <h1 style={{ marginTop: '1%' }} className="f-subheadline lh-solid">UBC Wikipedia</h1>
+        <div className="flex justify-center">
+          <Dropdown>
+            <Dropdown.Toggle className="shadow-5" variant="" id="dropdown-basic">
+              <input value={this.state.curSubject} onChange={this.changeCurSubject1} style={{ borderStyle: "none", opacity: '100', outlineWidth: '0' }} type="text" placeholder="Subject" >
+              </input>
+            </Dropdown.Toggle>
+            <Dropdown.Menu style={{ width: '200px' }}>
+              <Courses curCourse={this.state.curSubject} changeCurSubject={this.changeCurSubject2} />
+            </Dropdown.Menu>
+          </Dropdown>
+
+          <Dropdown>
+            <Dropdown.Toggle className="shadow-5" variant="" id="dropdown-basic">
+              <input value={this.state.curSubject} onChange={this.changeCurSubject1} style={{ borderStyle: "none", opacity: '100', outlineWidth: '0' }} type="text" placeholder="No." >
+              </input>
+            </Dropdown.Toggle>
+            <Dropdown.Menu style={{ width: '200px' }}>
+              <Courses curCourse={this.state.curSubject} changeCurSubject={this.changeCurSubject2} />
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+      </div>
+    );
+  }
 }
+
 
 export default App;
