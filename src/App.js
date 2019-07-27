@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Courses from './Components/Courses/Courses';
+// import { Dropdown, DropdownButton, Navbar } from 'react-bootstrap';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          React static site
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+    }
+  }
+
+
+
+
+
+
+  render() {
+    return (
+      <div className="tc">
+        <h1 style={{ marginTop: '1%' }} className="f-subheadline lh-solid">UBC Wikipedia</h1>
+        <Courses />
+      </div>
+    );
+  }
 }
+
 
 export default App;
