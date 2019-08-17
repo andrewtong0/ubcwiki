@@ -12,3 +12,56 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.coursePage-leftColumn {
+    text-align: left;
+}
+
+.coursePage-courseTags {
+    margin-right: .5em;
+    text-align: left;
+    color: white;
+    background-color: rgb(238, 104, 83);
+}
+
+.coursePage-buttons {
+    margin-top: .5em;
+    width: 100%;
+    text-align: center;
+}
+
+.coursePage-radialScore {
+    width: 30%;
+}
+
+.coursePage-scoreTitle {
+    text-align: left;
+}
+
+.coursePage-titleAndRadial {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.coursePage-rating {
+    display: table;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+}
+
+.course-description {
+    text-align: left;
+    color: black;
+}
+
+.coursePage {
+    color: rgb(238, 104, 83);
+}
+
+.coursePage-sscQuote {
+    font-style: italic;
+    text-align: right;
+    font-size: 110%;
+    opacity: 0.5;
+}
