@@ -1,23 +1,16 @@
 import React from 'react';
-import Course
 
 class ProfessorInfo extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name = '',
-            coursesList = []
-        }
-    }
-
     render() {
-        const { name, coursesList } = this.state;
         return (
             <div className="professorInfo">
-                <img src=""/>
-                <p>Gregor Kiczales</p>
-                <p>CPSC 110, CPSC 210</p>
+                <img src="gregor-kiczales.jpg"/>
+                <p className="profTag">{this.props.tag}</p>
+                <p className="profName">{this.props.name}</p>
+                <p className="profCourses">{this.props.courses}</p>
             </div>
         )
     }
 }
+
+export default ProfessorInfo;
