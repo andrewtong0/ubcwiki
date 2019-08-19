@@ -10,24 +10,42 @@ import { easeQuadInOut } from 'd3-ease';
 import AnimatedProgressProvider from './AnimatedProgressProvider';
 import ProfessorInfo from './ProfessorInfo'
 
-const difficulty = 70;
-const rating = 60;
 const orangeColour = "rgb(238, 104, 83)";
-const professors = [
-    {
-        imagesrc: "../Images/gregor-kiczales.jpg",
-        tag: "Professor",
-        name: "Gregor Kiczales",
-        courses: ["CPSC 110", "CPSC 210"]
-    }
-]
+
+const response = {
+    title: "CPSC 110",
+    description: "Computation, programs, and programming",
+    tags: ["First Year", "Clickers", "Assignment Heavy"],
+    resourcesLink: "#",
+    pastExamsLink: "#",
+    difficulty: 70,
+    rating: 60,
+    courseDescriptionSsc: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+    courseDescriptionCustom: "CPSC 110 aims to introduce basic coding techniques to students at a beginner level. The course teaches coding fundamentals with Racket in the DrRacket IDE and has a core focus on recursive coding techniques. The grade distribution usually takes on a bimodal shape with one peak at around 60% and the other at 90%. This distribution is generally justified as the separation between students putting time into the course, and those who do not.",
+    professors: [
+        {
+            imagesrc: "gregor-kiczales",
+            tag: "Professor",
+            name: "Gregor Kiczales",
+            courses: ["CPSC 110"],
+            rating: 0.65
+        },
+        {
+            imagesrc: "anthony-estey",
+            tag: "Professor",
+            name: "Anthony Estey",
+            courses: ["CPSC 110", "CPSC 210"],
+            rating: 0.95
+        }
+    ]
+}
 
 
 class CoursePage extends React.Component {
-    renderProfessors = () => {
+    renderProfessors = (professorsData) => {
         const components = [];
-        for (let i = 0; i < professors.length; i++) {
-            components.push(this.renderProfessor(professors[i]));
+        for (let i = 0; i < professorsData.length; i++) {
+            components.push(this.renderProfessor(professorsData[i]));
         }
         return components;
     }
@@ -46,10 +64,10 @@ class CoursePage extends React.Component {
                     <div className="row">
                         <Col id="course-sidebar" sm={4}>
                             <div id="course-name">
-                                <h2 className="coursePage-leftColumn">CPSC 110</h2>
+                                <h2 className="coursePage-leftColumn">{response.title}</h2>
                             </div>
                             <div id="course-summary">
-                                <h5 className="coursePage-leftColumn">Computation, programs, and programming</h5>
+                                <h5 className="coursePage-leftColumn">{response.description}</h5>
                             </div>
                             <div id="course-tags" style={{textAlign:"left"}}>
                                 <Badge className="coursePage-courseTags">First Year</Badge>
@@ -57,10 +75,10 @@ class CoursePage extends React.Component {
                                 <Badge className="coursePage-courseTags">Assignment Heavy</Badge>
                             </div>
                             <div id="course-resources">
-                                <Button className="coursePage-buttons" variant="outline-danger">Resources</Button>
+                                <Button className="coursePage-buttons" variant="outline-danger" href={response.resourcesLink}>Resources</Button>
                             </div>
                             <div id="course-pastexams">
-                                <Button className="coursePage-buttons" variant="outline-danger">Past Final Exams</Button>
+                                <Button className="coursePage-buttons" variant="outline-danger" href={response.pastExamsLink}>Past Final Exams</Button>
                             </div>
                             <div id="divider">
                                 <hr
@@ -77,7 +95,7 @@ class CoursePage extends React.Component {
                                 <div className="coursePage-radialScore coursePage-titleAndRadial">
                                     <AnimatedProgressProvider
                                             valueStart={0}
-                                            valueEnd={difficulty}
+                                            valueEnd={response.difficulty}
                                             duration={1.4}
                                             easingFunction={easeQuadInOut}
                                         >
@@ -101,7 +119,7 @@ class CoursePage extends React.Component {
                                 <div className="coursePage-radialScore coursePage-titleAndRadial">
                                     <AnimatedProgressProvider
                                             valueStart={0}
-                                            valueEnd={rating}
+                                            valueEnd={response.rating}
                                             duration={1.4}
                                             easingFunction={easeQuadInOut}
                                         >
@@ -121,18 +139,21 @@ class CoursePage extends React.Component {
                                 </div>
                             </div>
                         </Col>
-                        <Col id="course-description" sm={8} style={{marginTop: "2.75em"}}>
-                            <div id="course-description-ssc" className="course-description">
-                                <p>Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.</p>
+                        <Col id="course-description" sm={8} className="course-description">
+                            <div id="course-description-ssc" className="ssc-description">
+                                <h5>Course Description</h5>
+                                <p>{response.courseDescriptionSsc}</p>
                                 <p className="coursePage-sscQuote">~ UBC SSC course description</p>
                             </div>
-                            <div id="course-description-custom" className="course-description">
-                                <p>CPSC 110 aims to introduce basic coding techniques to students at a beginner level. The course teaches coding fundamentals with Racket in the DrRacket IDE and has a core focus on recursive coding techniques. The grade distribution usually takes on a bimodal shape with one peak at around 60% and the other at 90%. This distribution is generally justified as the separation between students putting time into the course, and those who do not.</p>
+                            <div id="course-description-custom" className="custom-description">
+                                <p>{response.courseDescriptionCustom}</p>
                             </div>
+                            <br/>
                             <div id="course-professors">
+                                <h5>Professors</h5>
                                 <div className="container">
                                     <div className="row">
-                                        {this.renderProfessors()}
+                                        {this.renderProfessors(response.professors)}
                                     </div>
                                 </div>
                             </div>
