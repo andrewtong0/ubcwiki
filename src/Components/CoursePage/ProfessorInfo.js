@@ -42,12 +42,17 @@ class ProfessorInfo extends React.Component {
             marginLeft: this.cardSizeScale(0.75),
             width: this.cardSizeScale(13.5)
         }
+        const profRating = {
+            fontSize: this.cardSizeScale(0.85),
+            textAlign: "right",
+            marginRight: this.cardSizeScale(0.65)
+        }
 
         return (
             <div className="professorCard, shadow" style={fullCard}>
                 <img className="profImage" src={require("../../Images/Profs/" + imagesrc + ".jpg")} style={imageStyle}/>
                 <div className="profInformation" style={information}>
-                    <p className="profTag" style={{fontSize: this.cardSizeScale(0.85)}}>{this.props.tag}</p>
+                    <p className="profRating" style={profRating}>{this.props.rating}</p>
                     <p className="profName">{this.props.name}</p>
                     <p className="profCourses" style={courseStyle}>{this.printCourses(this.props.courses)}</p>
                 </div>

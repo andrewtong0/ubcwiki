@@ -25,17 +25,15 @@ const response = {
     professors: [
         {
             imagesrc: "gregor-kiczales",
-            tag: "Professor",
+            rating: "65/100",
             name: "Gregor Kiczales",
-            courses: ["CPSC 110"],
-            rating: 0.65
+            courses: ["CPSC 110"]
         },
         {
             imagesrc: "anthony-estey",
-            tag: "Professor",
+            rating: "95/100",
             name: "Anthony Estey",
-            courses: ["CPSC 110", "CPSC 210"],
-            rating: 0.95
+            courses: ["CPSC 110", "CPSC 210"]
         }
     ]
 }
@@ -51,7 +49,7 @@ class CoursePage extends React.Component {
     }
     renderProfessor = (profData) => {
         return (
-            <ProfessorInfo imagesrc={profData.imagesrc} tag={profData.tag} name={profData.name} courses={profData.courses}/>
+            <ProfessorInfo imagesrc={profData.imagesrc} rating={profData.rating} name={profData.name} courses={profData.courses}/>
         )
     }
     requestData = (course) => {
