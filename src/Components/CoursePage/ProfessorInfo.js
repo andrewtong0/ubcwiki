@@ -44,7 +44,7 @@ class ProfessorInfo extends React.Component {
         }
 
         return (
-            <div className="professorCard" class="shadow" style={fullCard}>
+            <div className="professorCard, shadow" style={fullCard}>
                 <img className="profImage" src={require("../../Images/Profs/" + imagesrc + ".jpg")} style={imageStyle}/>
                 <div className="profInformation" style={information}>
                     <p className="profTag" style={{fontSize: this.cardSizeScale(0.85)}}>{this.props.tag}</p>

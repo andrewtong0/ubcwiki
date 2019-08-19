@@ -49,14 +49,20 @@ class CoursePage extends React.Component {
         }
         return components;
     }
-
     renderProfessor = (profData) => {
         return (
             <ProfessorInfo imagesrc={profData.imagesrc} tag={profData.tag} name={profData.name} courses={profData.courses}/>
         )
     }
+    requestData = (course) => {
+        fetch("https://andrewtong.api.stdlib.com/ubcwiki@dev/?courseName=" + course)
+            .then(answer => answer.json()).then(answerJson => {
+                this.response = answerJson;
+            }).catch(error => console.log(error));
+    }
 
     render() {
+        this.requestData("cpsc110");
         return (
             <div className="coursePage">
                 <div className="topBanner" style={{backgroundColor: orangeColour, height: "8em"}}/>
