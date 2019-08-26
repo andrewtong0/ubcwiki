@@ -15,6 +15,7 @@ const orangeColour = "rgb(238, 104, 83)";
 class CoursePage extends React.Component {
     renderProfessors = (professorsData) => {
         const components = [];
+        console.log(professorsData.length);
         for (let i = 0; i < professorsData.length; i++) {
             components.push(this.renderProfessor(professorsData[i]));
         }
@@ -123,7 +124,7 @@ class CoursePage extends React.Component {
                                 <h5>Professors</h5>
                                 <div className="container">
                                     <div className="row">
-                                        {this.renderProfessors(this.props.response.professors)}
+                                        {/* {this.renderProfessors(this.props.response.professors)} */}
                                     </div>
                                 </div>
                             </div>

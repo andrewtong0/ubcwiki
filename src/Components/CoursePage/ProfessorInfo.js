@@ -50,7 +50,7 @@ class ProfessorInfo extends React.Component {
 
         return (
             <div className="professorCard, shadow" style={fullCard}>
-                <img className="profImage" src={require("../../Images/Profs/" + imagesrc + ".jpg")} style={imageStyle}/>
+                {/* <img className="profImage" src={require("../../Images/Profs/" + imagesrc + ".jpg")} style={imageStyle}/> */}
                 <div className="profInformation" style={information}>
                     <p className="profRating" style={profRating}>{this.props.rating}</p>
                     <p className="profName">{this.props.name}</p>

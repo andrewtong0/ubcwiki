@@ -38,7 +38,8 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            page: 'home'
+            page: 'home',
+            response: undefined
         }
     }
 
@@ -74,6 +75,26 @@ class App extends React.Component {
         }
     }
 
+    renderCourse = ({match}) => {
+        let temp = {};
+ 
+        // console.log(this.state.response === undefined);
+        if (this.state.response === undefined) {
+            fetch("https://andrewtong.api.stdlib.com/ubcwiki@dev/?courseName=" + match.params.courseNo)
+            .then(answer => answer.json()).then(answerJson => this.setState({response : answerJson})).catch(error => console.log(error));
+            return (<h1>loading</h1>);
+        } else {
+            console.log(this.state.response);
+            return (<CoursePage changePage={this.changePage} response={this.state.response} />);
+        }
+    }
+
+    test = ({match}) => {
+        return (<h1>{match.params.courseNo}</h1>);
+    }
+
+
+
     render() {
         return (
             <div className="tc">
@@ -81,7 +102,7 @@ class App extends React.Component {
                     <Route exact path="/" render={() => this.selectPage('home')}></Route>
                     <Route exact path="/register" render={() => this.selectPage('register')}></Route>
                     <Route exact path="/signin" render={() => this.selectPage('signin')}></Route>
-                    <Route exact path="/coursePage" render={() => this.selectPage('coursePage')}></Route>
+                    <Route exact path="/:courseNo" render={(input) => this.renderCourse(input)}></Route>
                 </BrowserRouter>
 
             </div>
