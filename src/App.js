@@ -4,6 +4,8 @@ import Courses from './Components/Courses/Courses';
 import Register from './Components/Register/Register';
 import Signin from './Components/Signin/Signin';
 import CoursePage from './Components/CoursePage/CoursePage';
+import { BrowserRouter, Link, Route } from 'react-router-dom';
+// import Route from 'react-router-dom/Route';
 // import { Dropdown, DropdownButton, Navbar } from 'react-bootstrap';
 
 const response = {
@@ -36,41 +38,83 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            page: 'home'
+            page: 'home',
+            response: undefined
         }
     }
 
     changePage = (newPage) => {
-        this.setState({page: newPage});
+        this.setState({ page: newPage });
     }
 
     selectPage = (pageName) => {
-        switch(pageName) {
+        const homeComponent = ['signin', 'register', 'coursePage'].map((route, key) => {
+            return (
+                <Link key={key} style={{ textDecoration: "none" }} exact='true' to={"/" + route} >
+                    <button className="grow white bg-light-red" onClick={() => { this.changePage(route) }} style={{ height: '3.5em', width: '5em', marginTop: '5px', marginRight: '5px' }}>{route}</button>
+                </Link>
+            )
+        })
+        switch (pageName) {
             case 'home':
                 return (
                     <div>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                            <button className="grow white bg-light-red" onClick={() => {this.changePage('signin')}} style={{ width: '5em', marginTop: '5px', marginRight: '5px' }}>Sign In</button>
-                            <button className="grow white bg-light-red" onClick={() => {this.changePage('register')}} style={{ width: '5em', marginTop: '5px', marginLeft: '5px', marginRight: '5px' }}>Register</button>
-                            <button className="grow white bg-light-red" onClick={() => {this.changePage('coursePage')}} style={{ width: '5em', marginTop: '5px', marginLeft: '5px', marginRight: '5px' }}>Course Page</button>
+                            {homeComponent}
                         </div>
                         <h1 style={{ marginTop: '5px', marginBottom: '20px' }} className="f-subheadline lh-solid">UBC Wikipedia</h1>
                         <Courses />
                     </div>
                 );
             case 'register':
-                return (<Register changePage={this.changePage}/>);
+                return (<Register changePage={this.changePage} />);
             case 'signin':
-                return (<Signin changePage={this.changePage}/>);
+                return (<Signin changePage={this.changePage} />);
             case 'coursePage':
-                return (<CoursePage changePage={this.changePage} response={response}/>);
+                return (<CoursePage changePage={this.changePage} response={response} />);
+            default:
+                return (<h1>ERROR</h1>);
         }
     }
+
+    renderCourse = ({match}) => {
+        if (this.state.response === undefined) {
+            fetch("https://andrewtong.api.stdlib.com/ubcwiki@dev/?courseName=" + match.params.courseNo)
+            .then(
+                (answer) => {
+                    if (answer.status !== 200) {
+                        this.setState({response : null});
+                        return;
+                    }
+                    answer.json().then(answerJson => this.setState({response: answerJson}));
+                }    
+            ).catch(error => console.log(error));    
+                    // answer.json()).then(answerJson => this.setState({response : answerJson})).catch(console.log('hi'));
+            return (<h1>loading</h1>);
+        } else if (this.state.response !== null) {
+            return (<CoursePage changePage={this.changePage} response={this.state.response} />);
+        } else {
+            return (<h1>404 course not found!</h1>);
+        }
+
+    }
+
+    test = ({match}) => {
+        return (<h1>{match.params.courseNo}</h1>);
+    }
+
+
 
     render() {
         return (
             <div className="tc">
-                {this.selectPage(this.state.page)}
+                <BrowserRouter>
+                    <Route exact path="/" render={() => this.selectPage('home')}></Route>
+                    <Route exact path="/register" render={() => this.selectPage('register')}></Route>
+                    <Route exact path="/signin" render={() => this.selectPage('signin')}></Route>
+                    <Route exact path="/course/:courseNo" render={(input) => this.renderCourse(input)}></Route>
+                </BrowserRouter>
+
             </div>
         );
     }

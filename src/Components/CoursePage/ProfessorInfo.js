@@ -5,7 +5,7 @@ class ProfessorInfo extends React.Component {
     printCourses = (courses) => {
         let output = "";
         for (let i = 0; i < courses.length; i++) {
-            if (i == 0) {
+            if (i === 0) {
                 output = courses[0];
             }
             else {
