@@ -5,7 +5,7 @@ class ProfessorInfo extends React.Component {
     printCourses = (courses) => {
         let output = "";
         for (let i = 0; i < courses.length; i++) {
-            if (i == 0) {
+            if (i === 0) {
                 output = courses[0];
             }
             else {
@@ -50,7 +50,7 @@ class ProfessorInfo extends React.Component {
 
         return (
             <div className="professorCard, shadow" style={fullCard}>
-                {/* <img className="profImage" src={require("../../Images/Profs/" + imagesrc + ".jpg")} style={imageStyle}/> */}
+                <img className="profImage" src={require("../../Images/Profs/" + imagesrc + ".jpg")} style={imageStyle}/>
                 <div className="profInformation" style={information}>
                     <p className="profRating" style={profRating}>{this.props.rating}</p>
                     <p className="profName">{this.props.name}</p>

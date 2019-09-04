@@ -50,7 +50,7 @@ class App extends React.Component {
     selectPage = (pageName) => {
         const homeComponent = ['signin', 'register', 'coursePage'].map((route, key) => {
             return (
-                <Link key={key} style={{ textDecoration: "none" }} exact="true" to={"/" + route} >
+                <Link key={key} style={{ textDecoration: "none" }} exact='true' to={"/" + route} >
                     <button className="grow white bg-light-red" onClick={() => { this.changePage(route) }} style={{ height: '3.5em', width: '5em', marginTop: '5px', marginRight: '5px' }}>{route}</button>
                 </Link>
             )
@@ -72,21 +72,31 @@ class App extends React.Component {
                 return (<Signin changePage={this.changePage} />);
             case 'coursePage':
                 return (<CoursePage changePage={this.changePage} response={response} />);
+            default:
+                return (<h1>ERROR</h1>);
         }
     }
 
     renderCourse = ({match}) => {
-        let temp = {};
- 
-        // console.log(this.state.response === undefined);
         if (this.state.response === undefined) {
             fetch("https://andrewtong.api.stdlib.com/ubcwiki@dev/?courseName=" + match.params.courseNo)
-            .then(answer => answer.json()).then(answerJson => this.setState({response : answerJson})).catch(error => console.log(error));
+            .then(
+                (answer) => {
+                    if (answer.status !== 200) {
+                        this.setState({response : null});
+                        return;
+                    }
+                    answer.json().then(answerJson => this.setState({response: answerJson}));
+                }    
+            ).catch(error => console.log(error));    
+                    // answer.json()).then(answerJson => this.setState({response : answerJson})).catch(console.log('hi'));
             return (<h1>loading</h1>);
-        } else {
-            console.log(this.state.response);
+        } else if (this.state.response !== null) {
             return (<CoursePage changePage={this.changePage} response={this.state.response} />);
+        } else {
+            return (<h1>404 course not found!</h1>);
         }
+
     }
 
     test = ({match}) => {
@@ -102,7 +112,7 @@ class App extends React.Component {
                     <Route exact path="/" render={() => this.selectPage('home')}></Route>
                     <Route exact path="/register" render={() => this.selectPage('register')}></Route>
                     <Route exact path="/signin" render={() => this.selectPage('signin')}></Route>
-                    <Route exact path="/:courseNo" render={(input) => this.renderCourse(input)}></Route>
+                    <Route exact path="/course/:courseNo" render={(input) => this.renderCourse(input)}></Route>
                 </BrowserRouter>
 
             </div>

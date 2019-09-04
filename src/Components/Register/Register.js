@@ -3,14 +3,14 @@ import React from 'react';
 const Register = ({ changePage }) => {
     return (
         <div>
-            <div class="pa4 black-80">
+            <div className="pa4 black-80">
             <h1>Register</h1>
-                <div class="mt3">
-                    <label className="db fw4 lh-copy f6" for="email-address">Email address</label>
+                <div className="mt3">
+                    <label className="db fw4 lh-copy f6" htmlFor="email-address">Email address</label>
                     <input className="pa2 input-reset ba bg-transparent w-100 measure" type="email" name="email-address" id="email-address" />
                 </div>
-                <div class="mt3">
-                    <label className="db fw4 lh-copy f6" for="password">Password</label>
+                <div className="mt3">
+                    <label className="db fw4 lh-copy f6" htmlFor="password">Password</label>
                     <input className="b pa2 input-reset ba bg-transparent w-100 measure" type="password" name="password" id="password" />
                 </div>
                 <div className="mt3">

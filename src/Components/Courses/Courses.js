@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 const subjects = {
     CPSC: [110, 121, 210, 213, 221],
     MATH: [104, 105, 200, 221]
@@ -77,7 +78,9 @@ class Courses extends React.Component {
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
-                <button onClick={this.getCourseInfo} className='w-30 grow f4 pv2 white bg-light-red' style={{ marginTop: '20px' }}>Get Info</button>
+                <Link style={{ textDecoration: "none" }} exact="true" to={"/course/" + this.state.curCourse.toLowerCase() + this.state.curCourseNo} >
+                    <button className='w-30 grow f4 pv2 white bg-light-red' style={{ marginTop: '20px' }}>Get Info</button>
+                </Link>
             </div>
         );
     }

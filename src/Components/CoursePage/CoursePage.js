@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import ProgressBar from 'react-bootstrap/ProgressBar';
+// import ProgressBar from 'react-bootstrap/ProgressBar';
 import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col';
 import { CircularProgressbar } from 'react-circular-progressbar';
@@ -17,13 +17,13 @@ class CoursePage extends React.Component {
         const components = [];
         console.log(professorsData.length);
         for (let i = 0; i < professorsData.length; i++) {
-            components.push(this.renderProfessor(professorsData[i]));
+            components.push(this.renderProfessor(professorsData[i], i));
         }
         return components;
     }
-    renderProfessor = (profData) => {
+    renderProfessor = (profData, index) => {
         return (
-            <ProfessorInfo imagesrc={profData.imagesrc} rating={profData.rating} name={profData.name} courses={profData.courses}/>
+            <ProfessorInfo key={index} imagesrc={profData.imagesrc} rating={profData.rating} name={profData.name} courses={profData.courses}/>
         )
     }
 
