@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# UBC Wiki
 
-## Available Scripts
+Proof of concept wiki website for UBC that gives students key information about courses so they can make confident decisions on the courses that they sign up for.
 
-In the project directory, you can run:
+The wiki features course tags for at-a-glance key information, links to past exams and associated resources, an overall course rating and difficulty score, student course opinion, and list of professors and their ratings.
 
-### `npm start`
+Built by Andrew Tong and [Linus Hung](https://github.com/linusHche)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Landing Page
+![Landing Page](https://i.imgur.com/bzHrOHF.png)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+#### Course Page
+![Course Page](https://i.imgur.com/x35kDvG.png)
 
-### `npm test`
+### Dependencies
+The UBC course wiki is built on and requires the following to function:
+- ReactJS - for hosting the webpage (and the following React dependencies)
+    - Bootstrap
+    - Circular Progressbar
+- stdlib - API endpoint to get course information from
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### How It Works
+1. The user makes a query on the landing page to select information for a course.
+2. A call is made to our API endpoint hosted on stdlib to acquire the course-specific information.
+3. The page uses routing to load a new page with the queried information rendered into the appropriate places.
